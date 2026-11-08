@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cahvm6cyxmm8"]
 
-[ext_resource type="PackedScene" uid="uid://b8c5io8qwpi1g" path="res://truck.glb" id="1_ysele"]
+[ext_resource type="PackedScene" uid="uid://b8c5io8qwpi1g" path="res://Assets/truck.glb" id="1_ysele"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm0pq"]
 cull_mode = 2

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cahvm6cyxmm8"]
+
+[ext_resource type="PackedScene" uid="uid://b8c5io8qwpi1g" path="res://truck.glb" id="1_ysele"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm0pq"]
+cull_mode = 2
+albedo_color = Color(0.63579965, 0.6357994, 0.6357991, 1)
+metallic = 1.0
+
+[node name="truck" unique_id=2120540289 instance=ExtResource("1_ysele")]
+
+[node name="Console_001" parent="." index="0" unique_id=1654705167]
+surface_material_override/0 = SubResource("StandardMaterial3D_cm0pq")

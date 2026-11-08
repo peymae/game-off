@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dg7fc8bxdh0du"]
+
+[node name="ForwardView" type="Control" unique_id=1557694171]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1449936047]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.40260392, 0.4026039, 0.40260375, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1024578486]
+layout_mode = 0
+offset_left = 388.0
+offset_top = 281.0
+offset_right = 731.0
+offset_bottom = 364.0
+theme_override_font_sizes/font_size = 60
+text = "front view"

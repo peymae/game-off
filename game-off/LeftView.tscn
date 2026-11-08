@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://7w08wfem3qbf"]
+
+[node name="LeftView" type="Control" unique_id=2065247132]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1641538286]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5350234, 0.53502345, 0.53502345, 1)
+
+[node name="Label" type="Label" parent="." unique_id=83467392]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 271.0
+offset_right = 750.0
+offset_bottom = 354.0
+theme_override_font_sizes/font_size = 60
+text = "left view"

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cah2l4vcmy81d"]
+
+[ext_resource type="Script" uid="uid://biegp20aiwmrl" path="res://main.gd" id="1_r0du0"]
+[ext_resource type="PackedScene" uid="uid://dg7fc8bxdh0du" path="res://FrontView.tscn" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://7w08wfem3qbf" path="res://LeftView.tscn" id="3_fos0i"]
+[ext_resource type="PackedScene" uid="uid://cahvm6cyxmm8" path="res://Truck.tscn" id="4_cm0pq"]
+
+[node name="Main" type="Node3D" unique_id=1074307757]
+script = ExtResource("1_r0du0")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1463698837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3949277, 3.7786088, 2.737036)
+fov = 72.71938
+
+[node name="HUD" type="CanvasLayer" parent="Camera3D" unique_id=206589423]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=204820106]
+size = Vector2i(1920, 1080)
+
+[node name="FrontView" parent="SubViewport" unique_id=1557694171 instance=ExtResource("2_cm0pq")]
+offset_left = 1159.0
+offset_right = 1159.0
+
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=1102344319]
+size = Vector2i(1920, 1080)
+
+[node name="LeftView" parent="SubViewport2" unique_id=2065247132 instance=ExtResource("3_fos0i")]
+
+[node name="Truck" parent="." unique_id=2120540289 instance=ExtResource("4_cm0pq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9211695, 0, 1.4601226)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=994333097]
+transform = Transform3D(-0.9994502, 0.0331211, 0.0015040224, -0.0024313137, -0.118456356, 0.9929562, 0.033065967, 0.9924067, 0.11847176, 2.2500656, 9.5938835, 2.567739)
+light_energy = 6.183
+spot_range = 8.122016
+spot_angle = 49.619774

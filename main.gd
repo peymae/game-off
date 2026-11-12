@@ -1,8 +1,6 @@
 extends Node3D
 
-@onready var left_view := $SubViewport2/LeftView
-@onready var front_view := $SubViewport/FrontView
-@onready var cam := $Camera3D
+@onready var cam := $Truck/Camera3D
 
 const VIEW_ANGLES := [75.0, 0.0, -75.0]
 var current_view := 1
@@ -11,7 +9,7 @@ var tween: Tween
 func _ready() -> void:
 	cam.rotation_degrees = Vector3(0, VIEW_ANGLES[current_view], 0) 
 	
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("right"):
 		swap_view(1) 
 

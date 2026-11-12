@@ -1,36 +1,34 @@
 [gd_scene format=3 uid="uid://cah2l4vcmy81d"]
 
 [ext_resource type="Script" uid="uid://biegp20aiwmrl" path="res://main.gd" id="1_r0du0"]
-[ext_resource type="PackedScene" uid="uid://dg7fc8bxdh0du" path="res://UI/FrontView.tscn" id="2_cm0pq"]
-[ext_resource type="PackedScene" uid="uid://7w08wfem3qbf" path="res://UI/LeftView.tscn" id="3_fos0i"]
-[ext_resource type="PackedScene" uid="uid://cahvm6cyxmm8" path="res://Assets/Truck.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://dc6qidcagi61i" path="res://Scenes/Truck.tscn" id="4_cm0pq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ljucb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ljucb"]
 
 [node name="Main" type="Node3D" unique_id=1074307757]
 script = ExtResource("1_r0du0")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1463698837]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3949277, 3.7786088, 2.737036)
-fov = 72.71938
-
-[node name="HUD" type="CanvasLayer" parent="Camera3D" unique_id=206589423]
-
-[node name="SubViewport" type="SubViewport" parent="." unique_id=204820106]
-size = Vector2i(1920, 1080)
-
-[node name="FrontView" parent="SubViewport" unique_id=1557694171 instance=ExtResource("2_cm0pq")]
-offset_left = 1159.0
-offset_right = 1159.0
-
-[node name="SubViewport2" type="SubViewport" parent="." unique_id=1102344319]
-size = Vector2i(1920, 1080)
-
-[node name="LeftView" parent="SubViewport2" unique_id=2065247132 instance=ExtResource("3_fos0i")]
-
-[node name="Truck" parent="." unique_id=2120540289 instance=ExtResource("4_cm0pq")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9211695, 0, 1.4601226)
-
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=994333097]
-transform = Transform3D(-0.9994502, 0.0331211, 0.0015040224, -0.0024313137, -0.118456356, 0.9929562, 0.033065967, 0.9924067, 0.11847176, 2.2500656, 9.5938835, 2.567739)
+transform = Transform3D(0.9949311, -0.03390878, 0.09466989, -0.055190943, -0.97110105, 0.23219982, 0.08406042, -0.23624772, -0.96805006, -1.4045689, 6.3587437, -14.772932)
 light_energy = 6.183
-spot_range = 8.122016
-spot_angle = 49.619774
+spot_range = 23.606726
+spot_angle = 33.13201
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=965939462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -933)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=61472033]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 500, 0, 0, 0)
+shape = SubResource("BoxShape3D_ljucb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1270942741]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 500, 0, 0, 0)
+mesh = SubResource("BoxMesh_ljucb")
+
+[node name="Truck" parent="." unique_id=1624267762 instance=ExtResource("4_cm0pq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74370193, 0, 2.8302455)
+
+[node name="Camera3D" type="Camera3D" parent="Truck" unique_id=368930852]
+transform = Transform3D(1, 0, 0, 0, 0.99813485, 0.061048545, 0, -0.061048545, 0.99813485, -3.6580994, 4.8450365, -5.6040044)

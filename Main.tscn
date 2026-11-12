@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://biegp20aiwmrl" path="res://main.gd" id="1_r0du0"]
 [ext_resource type="PackedScene" uid="uid://dc6qidcagi61i" path="res://Scenes/Truck.tscn" id="4_cm0pq"]
+[ext_resource type="Curve3D" uid="uid://db3mrtyrd7mmv" path="res://Assets/Paths/downhill_01.tres" id="5_curve"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ljucb"]
 
@@ -27,8 +28,14 @@ shape = SubResource("BoxShape3D_ljucb")
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 500, 0, 0, 0)
 mesh = SubResource("BoxMesh_ljucb")
 
-[node name="Truck" parent="." unique_id=1624267762 instance=ExtResource("4_cm0pq")]
+[node name="DownhillPath" type="Path3D" parent="." unique_id=1155518074]
+curve = ExtResource("5_curve")
+
+[node name="Truck" parent="." unique_id=1624267762 node_paths=PackedStringArray("route") instance=ExtResource("4_cm0pq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74370193, 0, 2.8302455)
+route = NodePath("../DownhillPath")
 
 [node name="Camera3D" type="Camera3D" parent="Truck" unique_id=368930852]
 transform = Transform3D(1, 0, 0, 0, 0.99813485, 0.061048545, 0, -0.061048545, 0.99813485, -3.6580994, 4.8450365, -5.6040044)
+
+[node name="HUD" type="CanvasLayer" parent="Truck/Camera3D" unique_id=206589423]

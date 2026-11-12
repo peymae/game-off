@@ -4,6 +4,7 @@ extends VehicleBody3D
 	# test keys -> E = shift up, Q = shift down, R = toggle range 
 
 signal gear_changed(main_gear: int, high_range: bool, speed_cap: float)
+signal reached_end
 
 @export_group("Gearbox")
 # top speed (m/s) for main gears 1..5 in HIGH range
@@ -22,14 +23,32 @@ signal gear_changed(main_gear: int, high_range: bool, speed_cap: float)
 @export var steer_speed: float = 0.8        # how fast the wheel can turn (rad/s)
 @export var steer_return_speed: float = 0.4 # how fast it recenters 
 
+@export_group("Route")
+@export var route: Path3D
+## Measured from node origin to the model's centreline, mid-body and tyre contact
+## patch. Re-measure after swapping the model, or the truck steers toward a ghost.
+@export var model_offset := Vector3(2.5170898, 0.198, 5.592875)
+@export var guide_lookahead: float = 10.0
+@export var guide_gain: float = 0.35
+@export var guide_max_steer: float = 0.15
+
+const REACH_MARGIN := 1.0
+
 var main_gear: int = 1        # 1..5
 var high_range: bool = false  # false = LOW, true = HIGH
+
+var _progress := 0.0
+var _finished := false
+
 
 func _ready() -> void:
 	# lower center of mass
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = Vector3(0, -0.5, 0)
 	emit_gear()
+	if not _has_route():
+		push_warning("truck_script: no route set; falling back to manual J/K steering.")
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -53,7 +72,44 @@ func _physics_process(delta: float) -> void:
 	if over > 0.0:
 		apply_central_force(-forward * over * engine_brake_strength)
 
-	_update_steering(delta)
+	if _has_route():
+		_drive_guide(delta)
+	else:
+		_update_steering(delta)
+
+
+# Progress is measured, not integrated: physics decides where the truck is.
+func _drive_guide(delta: float) -> void:
+	var length := route.curve.get_baked_length()
+	if length <= 0.0:
+		return
+	var center := global_transform * model_offset
+	var local_center := route.global_transform.affine_inverse() * center
+	_progress = clampf(route.curve.get_closest_offset(local_center), 0.0, length)
+	# A physical truck never stops within a centimetre of the endpoint.
+	if not _finished and _progress >= length - REACH_MARGIN:
+		_finished = true
+		reached_end.emit()
+
+	var target := route.global_transform * route.curve.sample_baked(
+			minf(_progress + guide_lookahead, length), true)
+	var body := Transform3D(global_transform.basis, center)
+	var local := body.affine_inverse() * target
+	if local.z >= 0.0:
+		steering = move_toward(steering, 0.0, steer_return_speed * delta)
+		return
+	# Positive steering turns left, so a lookahead point on the left needs +steer.
+	var err := atan2(-local.x, -local.z)
+	var want := clampf(err * guide_gain, -guide_max_steer, guide_max_steer)
+	# Reversing flips the steering geometry; positive engine_force reverses on some wheel setups.
+	if linear_velocity.dot(-global_transform.basis.z) < -0.5:
+		want = -want
+	steering = move_toward(steering, want, steer_speed * delta)
+
+
+func _has_route() -> bool:
+	return route != null and route.curve != null
+
 
 # temp binded to J & K keys 
 func _update_steering(delta: float) -> void:

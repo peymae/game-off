@@ -4,14 +4,34 @@
 [ext_resource type="Script" uid="uid://bakw7lcf5dt2b" path="res://Scripts/truck_script.gd" id="2_script"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ljucb"]
-size = Vector3(6.0341797, 13.740356, 10.18775)
+size = Vector3(6.0341797, 6.710907, 16.996096)
 
 [node name="Truck" type="VehicleBody3D" unique_id=446787729]
 script = ExtResource("2_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=784430114]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5170898, 6.370178, -5.592875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5170898, 3.332962, -2.188702)
 shape = SubResource("BoxShape3D_ljucb")
 
 [node name="TruckModel" parent="CollisionShape3D" unique_id=65229902 instance=ExtResource("1_30hf4")]
-transform = Transform3D(-2.5, 0, -2.1855695e-07, 0, 2.5, 0, 2.1855695e-07, 0, -2.5, 0, -6.5583863, 0)
+transform = Transform3D(-2.5, 0, -2.1855695e-07, 0, 2.5, 0, 2.1855695e-07, 0, -2.5, 0, -3.5211701, -3.404173)
+
+[node name="WheelFL" type="VehicleWheel3D" parent="." unique_id=1090393958]
+transform = Transform3D(-1, 0, -1.9022147e-07, 0, 2.198126, 0, 8.742278e-08, 0, -2.17588, -4.9482045, 0.92492664, -9.266503)
+use_as_steering = true
+wheel_radius = 1.1
+
+[node name="WheelFR" type="VehicleWheel3D" parent="." unique_id=1348942756]
+transform = Transform3D(-1, 0, -1.9022147e-07, 0, 2.198126, 0, 8.742278e-08, 0, -2.17588, -0.08163166, 0.92492664, -9.266503)
+use_as_steering = true
+wheel_radius = 1.1
+
+[node name="WheelRR" type="VehicleWheel3D" parent="." unique_id=931857269]
+transform = Transform3D(-1, -3.3599422e-14, -1.9022147e-07, 0, 2.198126, -3.8044294e-07, 8.742278e-08, -3.8433257e-07, -2.17588, -0.08163166, 0.92492664, 2.2599268)
+use_as_traction = true
+wheel_radius = 1.1
+
+[node name="WheelRL" type="VehicleWheel3D" parent="." unique_id=1239501254]
+transform = Transform3D(-1, 0, -1.9022147e-07, 0, 2.198126, 0, 8.742278e-08, 0, -2.17588, -4.9645452, 0.92492664, 2.2599268)
+use_as_traction = true
+wheel_radius = 1.1

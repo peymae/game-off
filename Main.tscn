@@ -5,8 +5,10 @@
 [ext_resource type="Curve3D" uid="uid://db3mrtyrd7mmv" path="res://Assets/Paths/downhill_01.tres" id="5_curve"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ljucb"]
+size = Vector3(1, 0.34906006, 3.4091797)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ljucb"]
+size = Vector3(1, 1, 3.15625)
 
 [node name="Main" type="Node3D" unique_id=1074307757]
 script = ExtResource("1_r0du0")
@@ -18,24 +20,25 @@ spot_range = 23.606726
 spot_angle = 33.13201
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=965939462]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -933)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20210075, -13.621704)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=61472033]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 500, 0, 0, 0)
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -8.647989, -60.229492)
 shape = SubResource("BoxShape3D_ljucb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1270942741]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 500, 0, 0, 0)
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -24.940428, -53.90625)
 mesh = SubResource("BoxMesh_ljucb")
 
 [node name="DownhillPath" type="Path3D" parent="." unique_id=1155518074]
 curve = ExtResource("5_curve")
 
 [node name="Truck" parent="." unique_id=1624267762 node_paths=PackedStringArray("route") instance=ExtResource("4_cm0pq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74370193, 0, 2.8302455)
+transform = Transform3D(0.99935013, 0, -0.03604883, 0, 1, 0, 0.03604883, 0, 0.99935013, 0.74370193, 2.8762064, -6.98917)
 route = NodePath("../DownhillPath")
 
 [node name="Camera3D" type="Camera3D" parent="Truck" unique_id=368930852]
-transform = Transform3D(1, 0, 0, 0, 0.99813485, 0.061048545, 0, -0.061048545, 0.99813485, -3.6580994, 4.8450365, -5.6040044)
+transform = Transform3D(0.9999999, -2.3283064e-10, 0, 0, 0.99813485, 0.061048545, -3.7252903e-09, -0.06104854, 0.9981347, -3.650978, 4.8450365, -5.553762)
 
-[node name="HUD" type="CanvasLayer" parent="Truck/Camera3D" unique_id=206589423]
+[node name="TestCam" type="Camera3D" parent="." unique_id=67710212]
+transform = Transform3D(-4.371139e-08, -0.12186935, 0.99254614, 0, 0.99254614, 0.12186935, -1, 5.3270783e-09, -4.338557e-08, 12.813305, 4.7164526, -11.153971)

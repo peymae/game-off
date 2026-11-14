@@ -1,12 +1,14 @@
 extends Node3D
 
 @onready var cam := $Truck/Camera3D
+@onready var testing_cam := $TestCam
 
 const VIEW_ANGLES := [75.0, 0.0, -75.0]
 var current_view := 1
 var tween: Tween
 
 func _ready() -> void:
+	cam.make_current()
 	cam.rotation_degrees = Vector3(0, VIEW_ANGLES[current_view], 0) 
 	
 func _unhandled_input(_event: InputEvent) -> void:
